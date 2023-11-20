@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { useState } from 'react';
+import Button from '@mui/material/Button';
+import FixedContainer from './MapContainer';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,6 +12,8 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import LocalGasStationTwoToneIcon from '@mui/icons-material/LocalGasStationTwoTone';
+
+const ZIP_LENGTH = '-1';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -53,7 +58,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const [searchInput, setSearchInput] = useState ();
+  const handleChange = (e) => {
+    e.preventDefault();
+    setSearchInput(e.target.value);
+  };
+  if (searchInput == ZIP_LENGTH) {
+    setSearchInput((searchInput) => {
+      return searchInput;
+    });
+  }
   return (
+    <div>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
@@ -79,12 +95,21 @@ export default function SearchAppBar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search By Zip"
-              inputProps={{ 'aria-label': 'search' }}
+              placeholder="City, State or Zip"
+              value={searchInput}
             />
           </Search>
+          <Button 
+          onClick={handleChange}
+          variant="contained" color="primary">
+          Gas me
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
+    <FixedContainer 
+    zip={searchInput}
+    />
+    </div>
   );
 }
