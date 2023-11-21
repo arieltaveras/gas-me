@@ -1,36 +1,39 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import * as React from "react";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
 
-
+const MAPS_API = fetch("https://places.googleapis.com/v1/places:searchText")
+  .then((response) => response.json())
+  .then((data) => {
+    const jsonString = JSON.stringify(data);
+    console.log(jsonString);
+  });
 
 const columns = [
-  { id: 'place', label: 'Name', minWidth: 170 },
-  { id: 'addr', label: 'Address', minWidth: 100 },
+  { id: "place", label: "Name", minWidth: 170 },
+  { id: "addr", label: "Address", minWidth: 100 },
   {
-    id: 'price',
-    label: 'Price',
+    id: "price",
+    label: "Price",
     minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
+    align: "right",
+    format: (value) => value.toLocaleString("en-US"),
   },
 ];
 
-function createData({place, addr, price}) {
+function createData({ place, addr, price }) {
   return { place, addr, price };
 }
 
-const rows = [
-  createData()
-];
+const rows = [createData(``)];
 
-export default function ColumnGroupingTable() {
+export default function ColumnGroupingTable(id) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -44,11 +47,11 @@ export default function ColumnGroupingTable() {
   };
 
   return (
-    <Paper sx={{ width: '100%' }}>
+    <Paper sx={{ width: "100%" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow>
+            <TableRow className="row">
               <TableCell align="center" colSpan={2}>
                 Country
               </TableCell>
@@ -78,7 +81,7 @@ export default function ColumnGroupingTable() {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
+                          {column.format && typeof value === "number"
                             ? column.format(value)
                             : value}
                         </TableCell>

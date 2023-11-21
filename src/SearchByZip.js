@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState } from 'react';
-import Button from '@mui/material/Button';
 import FixedContainer from './MapContainer';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -90,20 +89,24 @@ export default function SearchAppBar() {
           >
             Gas Me <LocalGasStationTwoToneIcon/>
           </Typography>
-          <Search>
+          <Search
+           onChange={handleChange}
+           value={searchInput}
+          >
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+           
               placeholder="City, State or Zip"
-              value={searchInput}
             />
           </Search>
-          <Button 
-          onClick={handleChange}
+          
+          {/* <Button 
+          
           variant="contained" color="primary">
           Gas me
-          </Button>
+          </Button> */}
         </Toolbar>
       </AppBar>
     </Box>
