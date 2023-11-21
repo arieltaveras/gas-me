@@ -1,8 +1,10 @@
-# Getting Started with Create React App
+# GAS ME
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## What does GAS ME do.
+
+GAS ME is a site where you can enter an address at any form(City, state, zip) and you will get a a map of gas stations nearby. then a list will render under the map in order by distance and will show the name, address and price. You can click on the gas station on the map for name, address, rating and directions. 
 
 In the project directory, you can run:
 
